@@ -1,0 +1,109 @@
+{% extends 'client-base.html' %}
+
+{% block tittle %} Sign-up {% endblock %}
+
+
+{% block nav %}
+
+{% endblock %}
+
+{% block content %}
+<main class="main-content  mt-0">
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="mx-auto col-xl-6 col-lg-5 col-md-9 d-flex flex-column mx-lg-0 mt-5">
+                        <div class="border-0 card card-plain">
+                            <div class="pb-0 card-header text-start">
+                                {% if error_message %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error_message }}
+                                </div>
+                                {% endif %}
+                                <h4 class="font-weight-bolder">Sign up</h4>
+                                <p class="mb-0">Enter your email and password to sign up</p>
+                            </div>
+                            <div class="card-body">
+                                <form role="form" method="post" onsubmit="load(event)">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                {{ form.first_name.label_tag }}
+                                                {{ form.first_name }}
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                {{ form.last_name.label_tag }}
+                                                {{ form.last_name }}
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                {{ form.email.label_tag }}
+                                                {{ form.email }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                {{ form.username.label_tag }}
+                                                {{ form.username }}
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                {{ form.password1.label_tag }}
+                                                {{ form.password1 }}
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                {{ form.password2.label_tag }}
+                                                {{ form.password2 }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="mt-4 mb-0 btn btn-lg btn-dark w-100">Sign Up</button>
+                                    </div>
+                                </form>
+                            </div>
+                            {% for error in form.first_name.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in form.last_name.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in form.email.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in form.username.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in form.password1.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in form.password2.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="top-0 my-auto text-center col-6 d-lg-flex d-none h-100 pe-0 position-absolute end-0 justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 px-7 d-flex flex-column justify-content-center"
+                            style="background-image: url('https://res.cloudinary.com/devqjzqxb/image/upload/v1683575410/samples/bike.jpg'); background-position: 50%;">
+                            <div
+                                class="p-5 mt-auto mb-4 border border-white shadow mx-n5 blur position-relative z-index-1 d-flex flex-column border-radius-md">
+                                <h4 class="mt-5 opacity-10 text-dark font-weight-bolder">"Attention is the new
+                                    currency"</h4>
+                                <p class="text-dark">The more effortless the writing looks, the more effort the
+                                    writer actually put into the process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

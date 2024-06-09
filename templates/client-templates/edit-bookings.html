@@ -1,0 +1,302 @@
+{% extends 'client-base.html' %}
+
+{% block tittle %} My-bookings{% endblock %}
+
+{% block nav %}
+<div class="container top-0 position-sticky z-index-sticky">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg rounded-2 top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-0 px-3"
+                style="background-image: url('https://res.cloudinary.com/devqjzqxb/image/upload/v1715779079/design3/jq0wrzj99k1hjhvxxymz.jpg'); background-position: center;">
+                <div class="container-fluid">
+                    <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3">
+                        Aileen Guigue Hotel
+                    </a>
+                    <button class="shadow-none navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="mt-2 navbar-toggler-icon">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </span>
+                    </button>
+                    <div class="pt-3 pb-2 collapse navbar-collapse w-100 py-lg-0 justify-content-end" id="navigation">
+                        <div class="ms-auto btn-group" role="tablist">
+                            <a href="/" onclick="load2()" class="mb-0 btn btn-sm btn-outline-white">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M0.5 7L8 0.5L15.5 7V15.5C15.5 15.7761 15.2761 16 15 16H11C10.7239 16 10.5 15.7761 10.5 15.5V11.9142C10.5 11.1977 9.97155 10.7489 9.29289 10.8485L9.14645 10.8787C9.10537 10.8899 9.06352 10.8977 9.02131 10.902C8.42581 10.9795 8 11.4817 8 12.0929V14.5C8 14.7761 7.77614 15 7.5 15H4.5C4.22386 15 4 14.7761 4 14.5V12.0929C4 11.4817 3.57419 10.9795 2.97869 10.902C2.93648 10.8977 2.89463 10.8899 2.85355 10.8787L2.70711 10.8485C2.02845 10.7489 1.5 11.1977 1.5 11.9142V15.5C1.5 15.7761 1.27614 16 1 16H0.999999C0.723858 16 0.5 15.7761 0.5 15.5V7ZM5 14H6V11.5C6 11.2239 6.22386 11 6.5 11H9.5C9.77614 11 10 11.2239 10 11.5V14H11V8.5L8 2.5L5 8.5V14Z"
+                                        fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">HOME</span>
+                            </a>
+                            <a href="/categories/" class="mb-0 btn btn-sm btn-outline-white">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 6H12L10 4H2C0.897 4 0 4.897 0 6V18C0 19.103 0.897 20 2 20H22C23.103 20 24 19.103 24 18V8C24 6.897 23.103 6 22 6ZM12 16H2V8H12V16ZM22 18H2V16H22V18Z"
+                                        fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">CATEGORIES</span>
+                            </a>
+                            <a href="javascript:;" class="mb-0 btn btn-sm btn-outline-white position-relative active"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12 12C14.205 12 16 10.205 16 8C16 5.795 14.205 4 12 4C9.795 4 8 5.795 8 8C8 10.205 9.795 12 12 12ZM20 20H18C18 16.686 15.314 14 12 14C8.686 14 6 16.686 6 20H4C4 15.581 7.581 12 12 12C16.419 12 20 15.581 20 20Z"
+                                        fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">USER</span>
+                                <span class="badge badge-md badge-circle badge-floating bg-gradient-dark border border-white top-0" style="float: right; display: none;">!</span>
+                            </a>
+                            <ul class=" dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton">
+                                {% if user.is_authenticated %}
+                                <li>
+                                    <a class="dropdown-item border-radius-md" {% block profile_link %}{% endblock %} href="/profile/">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Profile
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" {% block message_link %}{% endblock %} href="/my-bookings/">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">My-bookings
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'my_notifications' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">My-notifications
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_out' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign out
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_in' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign in
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_up' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign up
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 my-3">
+    <div class="mt-4 row">
+        <h3 class="mb-5 font-weight-bold">MY-BOOKINGS</h3>
+        <hr class="my-2 horizontal dark">
+    </div>
+    <div class="mt-4 row">
+        <div class="col-lg-5">
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="border border-4 border-gray-100 avatar avatar-2xl rounded-circle position-relative mt-n7"
+                    style="float: right;">
+                    <img src="{{ user.profile_image }}" alt="profile_image" class="w-100 h-100" id="imagePreview">
+                </div>
+                <div class="card-body">
+                    <h5 class="font-weight-bolder">Edit my booking</h5>
+                    <form role="form" method="post" enctype="multipart/form-data" onsubmit="load(event)">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">ROOM:</label>
+                                    <input type="text" name="room" value="{{ booking.room }}" class="form-control" placeholder="" aria-label="" id="room" disabled>
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">DAYS OCCUPIED:</label>
+                                    <input type="text" name="days_occupied" value="{{ booking.days_occupied }}" class="form-control" placeholder="" aria-label="" id="days_occupied" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">TOTAL PRICE:</label>
+                                    <input type="text" name="total_price" value="{{ booking.total_price }}" class="form-control" placeholder="" aria-label="" id="total_price" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">DATE START:</label>
+                                    <input type="text" name="date_start" value="{{ booking.date_start|date:'d/m/Y' }}" class="form-control" placeholder="" aria-label="" id="date_start" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">DATE ENDS:</label>
+                                    <input type="text" name="date_end" value="{{ booking.date_end|date:'d/m/Y' }}" class="form-control" placeholder="" aria-label="" id="date_end" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_max_occupancy">DATE BOOKED:</label>
+                                    <input type="text" name="date_booked" value="{{ booking.date_booked|date:'d/m/Y' }}" class="form-control" placeholder="" aria-label="" id="date_booked" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.status.label_tag }}
+                                    {{ form.status }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-center">
+                            <button type="submit" class="mt-2 mb-0 btn btn-dark">
+                                <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.39341 7.20504C5.12004 6.93167 4.67683 6.93167 4.40346 7.20504C4.1301 7.47839 4.1301 7.92163 4.40346 8.19498L6.50346 10.295C6.77683 10.5683 7.22006 10.5683 7.49341 10.295L9.59341 8.19498C9.86676 7.92163 9.86676 7.47839 9.59341 7.20504C9.32006 6.93167 8.87682 6.93167 8.60347 7.20504L7.69844 8.11007V4.20001H11.1984C11.9717 4.20001 12.5984 4.82681 12.5984 5.60001V10.5C12.5984 11.2732 11.9717 11.9 11.1984 11.9H2.79844C2.02524 11.9 1.39844 11.2732 1.39844 10.5V5.60001C1.39844 4.82681 2.02524 4.20001 2.79844 4.20001H6.29844V8.11007L5.39341 7.20504Z"
+                                        fill="#F9FAFB" />
+                                    <path
+                                        d="M6.30078 2.79998C6.30078 2.41338 6.61419 2.09998 7.00078 2.09998C7.38739 2.09998 7.70078 2.41338 7.70078 2.79998V4.19998H6.30078V2.79998Z"
+                                        fill="#F9FAFB" />
+                                </svg>
+                                Save
+                            </button>
+                            <a type="submit" class="mt-2 mb-0 btn btn-danger text-end" href="/my-bookings/">
+                                <svg class="me-1" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.39341 7.20504C5.12004 6.93167 4.67683 6.93167 4.40346 7.20504C4.1301 7.47839 4.1301 7.92163 4.40346 8.19498L6.50346 10.295C6.77683 10.5683 7.22006 10.5683 7.49341 10.295L9.59341 8.19498C9.86676 7.92163 9.86676 7.47839 9.59341 7.20504C9.32006 6.93167 8.87682 6.93167 8.60347 7.20504L7.69844 8.11007V4.20001H11.1984C11.9717 4.20001 12.5984 4.82681 12.5984 5.60001V10.5C12.5984 11.2732 11.9717 11.9 11.1984 11.9H2.79844C2.02524 11.9 1.39844 11.2732 1.39844 10.5V5.60001C1.39844 4.82681 2.02524 4.20001 2.79844 4.20001H6.29844V8.11007L5.39341 7.20504Z"
+                                        fill="#F9FAFB" />
+                                    <path
+                                        d="M6.30078 2.79998C6.30078 2.41338 6.61419 2.09998 7.00078 2.09998C7.38739 2.09998 7.70078 2.41338 7.70078 2.79998V4.19998H6.30078V2.79998Z"
+                                        fill="#F9FAFB" />
+                                </svg>
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.0/js/buttons.print.min.js"></script>
+<!-- DataTables initialization script -->
+<script>
+    $(document).ready(function() {
+    var table = $('#bookings').DataTable({
+        "paging": true,
+        "lengthMenu": [5, 10, 25, 50],
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "paginate": {
+                "previous": "&laquo; Previous",
+                "next": "Next &raquo;"
+            }
+        },
+        "drawCallback": function() {
+            $('#bookings_paginate').find('.paginate_button').addClass('btn btn-sm btn-outline-primary');
+            $('#bookings_paginate').find('.paginate_button.current').addClass('btn btn-sm btn-primary');
+        },
+        "columnDefs": [
+            {
+                "targets": -1,
+                "orderable": false
+            }
+        ]
+    });
+});
+</script>
+{% if user.is_authenticated %}
+<script>
+    (async () => {
+        const badge = document.querySelector('.badge');
+        let flag = false;
+        let flagLogged = false;
+        async function loadNotifications() {
+            try {
+                let response = await $.ajax({
+                    url: '{% url "my_notification_data" %}',
+                    type: 'GET',
+                    dataType: 'json'
+                });
+                flag = response.data.some(e => e.is_read_cleint === false);
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+            }
+            if (flag && !flagLogged) {
+                badge.style.removeProperty('display');
+                flagLogged = true;
+            } else if (!flag && flagLogged) {
+                badge.style.display = 'none';
+                flagLogged = false;
+            }
+        }
+        await loadNotifications();
+        setInterval(loadNotifications, 1000);
+    })()
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aileen Guigue hotel | {% block tittle %} {% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
+    {% block styles %}
+    {% endblock %}
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link id="pagestyle" href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/devqjzqxb/image/upload/v1716026424/design3/qyyqgsqahb25arbvd89p.png">
+</head>
+
+<body class="g-sidenav-show bg-gray-100 dark-version">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand d-flex align-items-center m-0">
+                <img class="navbar-brand-img" src="https://res.cloudinary.com/devqjzqxb/image/upload/v1716026424/design3/qyyqgsqahb25arbvd89p.png" alt>
+                <span class="font-weight-bold ms-2">Hotel Reservation System</span>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse px-3 w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                {% block navbar %}
+                {% endblock %}
+            </ul>
+        </div>
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <nav class="px-0 mx-5 rounded shadow-none z-index-2 navbar navbar-main navbar-expand-lg position-sticky top-1 z-index-sticky" navbar-scroll="true"
+            id="navbarBlur" data-scroll="true">
+            <div class="container px-2 py-1 min-w-100">
+                <nav aria-label="breadcrumb">
+                    <ol class="px-0 pt-1 pb-0 mb-1 bg-transparent breadcrumb me-sm-6 me-5">
+                        <li class="text-sm breadcrumb-item">
+                            <a class="opacity-5 p-0 breadcrumb-text  text-white" href="javascript:;">{% block tag %}{% endblock %}</a>
+                        </li>
+                    </ol>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    </div>
+                    <ul class="navbar-nav justify-content-end">
+                        <!-- added -->
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="p-0 nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="badge badge-md badge-circle badge-floating bg-gradient-dark border border-white top-0" style="float: right; display: none;">!</span>
+                                <div class="avatar avatar-sm position-relative">
+                                    {% if user.profile_image %}
+                                    <img src="{{ user.profile_image }}" alt="profile_image" class="w-100 border-radius-md" style="height: 100%;">
+                                    {% else %}
+                                    <img src="https://res.cloudinary.com/devqjzqxb/image/upload/v1715779076/design3/pcqcgzowqxqbnc71cbz2.webp" alt="profile_image" class="w-100 border-radius-md" style="height: 100%;">
+                                    {% endif%}
+                                </div>
+                            </a>
+                            <ul class="px-2 py-3 dropdown-menu dropdown-menu-end me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" {% block profile_link %}{% endblock %}>
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Profile
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" {% block message_link %}{% endblock %}>
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Notifications
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'logout' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign out
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- added -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% block script %}
+    {% endblock %}
+    <script>
+        function load(event) {
+            event.preventDefault();
+            event.target.submit();
+            Swal.fire({
+                title: "<i>PLEASE WAIT</i>",
+                html: `<div class="spinner-border" role="status"><span class="sr-only">Please Wait</span></div>`,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+            })
+        }
+        function load2() {
+            Swal.fire({
+                title: "<i>PLEASE WAIT</i>",
+                html: `<div class="spinner-border" role="status"><span class="sr-only">Please Wait</span></div>`,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+            })
+            window.addEventListener('beforeunload', function () {
+                Swal.close();
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/core/popper.min.js' %}"></script>
+    <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/plugins/smooth-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/plugins/swiper-bundle.min.js' %}" type="text/javascript"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        (async () => {
+            const badge = document.querySelector('.badge');
+            let flag = false;
+            let flagLogged = false;
+            async function loadNotifications() {
+                try {
+                    let response = await $.ajax({
+                        url: '{% url "notifications_data" %}',
+                        type: 'GET',
+                        dataType: 'json'
+                    });
+                    flag = response.data.some(e => e.is_read_admin === false);
+                } catch (error) {
+                    console.error('Error loading notifications:', error);
+                }
+                if (flag && !flagLogged) {
+                    badge.style.removeProperty('display');
+                    flagLogged = true;
+                } else if (!flag && flagLogged) {
+                    badge.style.display = 'none';
+                    flagLogged = false;
+                }
+            }
+            await loadNotifications();
+            setInterval(loadNotifications, 1000);
+        })()
+    </script>
+</body>
+
+</html>

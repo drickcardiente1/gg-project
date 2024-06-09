@@ -1,0 +1,430 @@
+{% extends 'client-base.html' %}
+
+{% block tittle %} Categories{% endblock %}
+
+{% block nav %}
+<div class="container top-0 position-sticky z-index-sticky">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg rounded-2 top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-0 px-3"
+                style="background-image: url('https://res.cloudinary.com/devqjzqxb/image/upload/v1715779079/design3/jq0wrzj99k1hjhvxxymz.jpg'); background-position: center;">
+                <div class="container-fluid">
+                    <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3">
+                        Aileen Guigue Hotel
+                    </a>
+                    <button class="shadow-none navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="mt-2 navbar-toggler-icon">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </span>
+                    </button>
+                    <div class="pt-3 pb-2 collapse navbar-collapse w-100 py-lg-0 justify-content-end" id="navigation">
+                        <div class="ms-auto btn-group" role="tablist">
+                            <a href="/" onclick="load2()" class="mb-0 btn btn-sm btn-outline-white">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M0.5 7L8 0.5L15.5 7V15.5C15.5 15.7761 15.2761 16 15 16H11C10.7239 16 10.5 15.7761 10.5 15.5V11.9142C10.5 11.1977 9.97155 10.7489 9.29289 10.8485L9.14645 10.8787C9.10537 10.8899 9.06352 10.8977 9.02131 10.902C8.42581 10.9795 8 11.4817 8 12.0929V14.5C8 14.7761 7.77614 15 7.5 15H4.5C4.22386 15 4 14.7761 4 14.5V12.0929C4 11.4817 3.57419 10.9795 2.97869 10.902C2.93648 10.8977 2.89463 10.8899 2.85355 10.8787L2.70711 10.8485C2.02845 10.7489 1.5 11.1977 1.5 11.9142V15.5C1.5 15.7761 1.27614 16 1 16H0.999999C0.723858 16 0.5 15.7761 0.5 15.5V7ZM5 14H6V11.5C6 11.2239 6.22386 11 6.5 11H9.5C9.77614 11 10 11.2239 10 11.5V14H11V8.5L8 2.5L5 8.5V14Z"
+                                        fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">HOME</span>
+                            </a>
+                            <a href="javascript:;" class="mb-0 btn btn-sm btn-outline-white active">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 6H12L10 4H2C0.897 4 0 4.897 0 6V18C0 19.103 0.897 20 2 20H22C23.103 20 24 19.103 24 18V8C24 6.897 23.103 6 22 6ZM12 16H2V8H12V16ZM22 18H2V16H22V18Z"
+                                        fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">CATEGORIES</span>
+                            </a>
+                            <a href="javascript:;" class="mb-0 btn btn-sm btn-outline-white position-relative"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12C14.205 12 16 10.205 16 8C16 5.795 14.205 4 12 4C9.795 4 8 5.795 8 8C8 10.205 9.795 12 12 12ZM20 20H18C18 16.686 15.314 14 12 14C8.686 14 6 16.686 6 20H4C4 15.581 7.581 12 12 12C16.419 12 20 15.581 20 20Z" fill="currentColor" />
+                                </svg>
+                                <span class="ms-2">USER</span>
+                                <span class="badge badge-md badge-circle badge-floating bg-gradient-dark border border-white top-0" style="float: right; display: none;">!</span>
+                            </a>
+                            <ul class=" dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton">
+                                {% if user.is_authenticated %}
+                                <li class="">
+                                    <a class="dropdown-item border-radius-md" {% block profile_link %}{% endblock %} href="/profile/">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Profile
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" {% block message_link %}{% endblock %} href="/my-bookings/">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">My-bookings
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'my_notifications' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">My-notifications
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_out' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign out
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_in' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign in
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="{% url 'sign_up' %}">
+                                        <div class="py-1 d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-1 text-sm font-weight-normal">
+                                                    <span class="font-weight-bold text-secondary">Sign up
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="top-0 overflow-visible bg-cover page-header w-100 start-0 position-relative"
+    style="background-image: url('https://res.cloudinary.com/devqjzqxb/image/upload/v1717927298/design3/fwpdihif6xybcaa9jtxs.jpg'); background-position: bottom;">
+    <span class="mask bg-gradient-dark opacity-3"></span>
+    <div class="container mt-8 postion-relative z-index-2">
+        <div class="row">
+            <div class="mx-auto text-center col-md-6">
+                <h2 class="text-white">CATEGORIES</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="bg-gray-100 main-content position-relative max-height-vh-100 h-100">
+    <div class="container py-3 my-3">
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow-xs border mb-4 pb-3">
+                    <div class="card-header pb-0 p-3">
+                        <h6 class="mb-0 font-weight-semibold text-lg">Enter your booking details to search for available
+                            rooms</h6>
+                        <p class="text-sm mb-1">Get started by filling out the form below to find the perfect room for
+                            your stay.</p>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="row">
+
+
+                            <div class="col-xl-4 col-md-6 mb-xl-0">
+                                <form class="multisteps-form__form" style="height: 444px;" data-gtm-form-interact-id="0"
+                                    method="post" action="{% url 'categories' %}">
+                                    {% csrf_token %}
+                                    <div class="card card-body multisteps-form__panel js-active"
+                                        data-animation="FadeIn">
+                                        <div class="multisteps-form__content">
+                                            <div class="mt-3 row">
+                                                <div class="col-12">
+                                                    <label for="booking-start">Booking Start</label>
+                                                    <input id="startDate" name="startDate" {% if start %}
+                                                        value="{{ start }}" {% endif %}
+                                                        class="mb-3 multisteps-form__input form-control" type="date"
+                                                        placeholder="Select start date" required>
+                                                    <label for="booking-end">Booking End</label>
+                                                    <input id="endDate" name="endDate" {% if end %} value="{{ end }}" {% endif %} class="mb-3 multisteps-form__input form-control" type="date" placeholder="Select end date" required>
+                                                </div>
+                                                <div class="mt-2 button-row d-flex">
+                                                    <button class="mb-0 text-white btn bg-dark ms-auto js-btn-next"
+                                                        type="submit" title="Next">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            
+                            {% if available_rooms %}
+                            {% for room in available_rooms %}
+                            <div class="col-xl-4 col-md-12 mb-xl-0 mb-4">
+                                <div class="mb-4 card card-background card-background-after-none align-items-start">
+                                    {% for image in room.images.all %}
+                                        {% if image.is_default %}
+                                            <div class="bg-cover full-background" style="height: 100%; width: 100%;">
+                                                <img src="{{ image.image_url }}" alt="{{ room.room_name }} Image" style="width: 100%; height: 100%;">
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <span class="mask bg-dark opacity-1 border-radius-lg"></span>
+                                    <div class="p-3 card-body text-start w-100">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div
+                                                    class="p-3 mt-8 d-flex justify-content-center align-items-center w-100 border-radius-md">
+                                                    {% if user.is_authenticated %}
+                                                    {% if user.role == 'client' %}
+                                                    {{ available_rooms.id }}
+                                                    <button type="button" class="mb-0 btn btn-outline-white" onclick="sendandgo(`{{ user.id }}`, `{{ room.id }}`)">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M20 2H6C4.897 2 4 2.897 4 4V20C4 21.103 4.897 22 6 22H20C21.103 22 22 21.103 22 20V4C22 2.897 21.103 2 20 2ZM20 20H6V4H20L20.002 20H20Z"
+                                                                fill="currentColor" />
+                                                            <path
+                                                                d="M13 11H17V13H13V11ZM13 7H17V9H13V7ZM13 15H17V17H13V15ZM7 11H9V13H7V11ZM7 7H9V9H7V7ZM7 15H9V17H7V15Z"
+                                                                fill="currentColor" />
+                                                        </svg>
+                                                        <span class="ms-2">
+                                                            BOOK NOW
+                                                        </span>
+                                                    </button>
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <button type="button" class="mb-0 btn btn-outline-white" onclick="sendandgo(`{{ user.id }}`, `{{ room.id }}`)">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M20 2H6C4.897 2 4 2.897 4 4V20C4 21.103 4.897 22 6 22H20C21.103 22 22 21.103 22 20V4C22 2.897 21.103 2 20 2ZM20 20H6V4H20L20.002 20H20Z"
+                                                                fill="currentColor" />
+                                                            <path
+                                                                d="M13 11H17V13H13V11ZM13 7H17V9H13V7ZM13 15H17V17H13V15ZM7 11H9V13H7V11ZM7 7H9V9H7V7ZM7 15H9V17H7V15Z"
+                                                                fill="currentColor" />
+                                                        </svg>
+                                                        <span class="ms-2">
+                                                            BOOK NOW
+                                                        </span>
+                                                    </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button href="javascript:;" imglink="{% for image in room.images.all %} {{ image.image_url }} {% endfor %} "onclick="loadimage(this)" class="btn btn-outline-info">
+                                    <h4 class="font-weight-semibold">{{ room.room_name }}</h4>
+                                </button>
+                                <p class="mb-4">DAILY RATE :{{ room.daily_rate }}</p>
+                                <p class="mb-4">MAX OCCUPANCY {{ room.max_occupancy }}</p>
+                                <p class="mb-4">{{ room.description }}</p>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <p>No rooms available for the selected dates.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+    function deductDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() - days);
+        return result;
+    }
+    let firstChange = true;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        startDateInput.setAttribute('min', today);
+        endDateInput.setAttribute('min', today);
+
+        if (endDateInput.value == '') {
+            endDateInput.setAttribute('disabled', true);
+        } else {
+            const prev = new Date(endDateInput.value);
+            const previousDay = deductDays(prev, 1);
+            const previousDayString = previousDay.toISOString().split('T')[0];
+            startDateInput.setAttribute('max', previousDayString);
+            const start = new Date(startDateInput.value);
+            const nextDayvalue = addDays(start, 1);
+            const nextDayset = nextDayvalue.toISOString().split('T')[0];
+            endDateInput.setAttribute('min', nextDayset);
+        }
+
+        startDateInput.addEventListener('input', function () {
+            const start = new Date(startDateInput.value);
+            const nextDayvalue = addDays(start, 1);
+            const nextDayset = nextDayvalue.toISOString().split('T')[0];
+            endDateInput.setAttribute('min', nextDayset);
+            if (firstChange) {
+                endDateInput.removeAttribute('disabled');
+                const startDate = new Date(startDateInput.value);
+                const nextDay = addDays(startDate, 1);
+                const nextDayString = nextDay.toISOString().split('T')[0];
+                endDateInput.value = nextDayString;
+                startDateInput.setAttribute('max', startDateInput.value);
+                firstChange = false;
+            }
+        });
+        endDateInput.addEventListener('change', function () {
+            const prev = new Date(endDateInput.value);
+            const previousDay = deductDays(prev, 1);
+            const previousDayString = previousDay.toISOString().split('T')[0];
+            startDateInput.setAttribute('max', previousDayString);
+        });
+    });
+</script>
+<script>
+    function getCSRFToken() {
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        return csrfToken;
+    }
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({
+            start_date: startDateInput.value,
+            end_date: endDateInput.value
+        })
+    };
+
+    function send_request(uid, rid){
+                fetch(`/user/${uid}/book/${rid}`, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                Swal.fire({
+                    title: "BOOK SUCCESSFULY!",
+                    text: "We appreciate your interest. An administrator will be in touch with you shortly to confirm your request. If you have any urgent inquiries, please don't hesitate to reach out to us directly. Thank you for your patience!",
+                    icon: "success",
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+                    timer: 5000,
+                    timerProgressBar: true
+                }).then(function(result) {
+                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                        window.location.href = "/categories/";
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+
+    const sendandgo = (uid, rid) => {
+        console.log(uid)
+        if (uid === null || uid === undefined || uid === 'None') {
+            window.location.href = '/sign-in/'
+        }else{
+            send_request(uid, rid)
+        }
+    };
+</script>
+<script>
+function loadimage(button) {
+    const imglink = button.getAttribute('imglink');
+    const urls = imglink.split(' ').filter(url => url.trim() !== '');
+    let imageHtml = '<div style="display: flex; flex-wrap: wrap;">';
+    urls.forEach(url => {
+        imageHtml += `<img src="${url}" style="width: 50vh; height: 35vh; margin: 5px;">`;
+    });
+    imageHtml += '</div>';
+    Swal.fire({
+        title: 'Image Gallery',
+        html: imageHtml,
+        width: '80%',
+        background: '#fff',
+        showCloseButton: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        focusConfirm: false,
+    });
+}
+</script>
+{% if user.is_authenticated %}
+<script>
+    (async () => {
+        const badge = document.querySelector('.badge');
+        let flag = false;
+        let flagLogged = false;
+        async function loadNotifications() {
+            try {
+                let response = await $.ajax({
+                    url: '{% url "my_notification_data" %}',
+                    type: 'GET',
+                    dataType: 'json'
+                });
+                flag = response.data.some(e => e.is_read_cleint === false);
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+            }
+            if (flag && !flagLogged) {
+                badge.style.removeProperty('display');
+                flagLogged = true;
+            } else if (!flag && flagLogged) {
+                badge.style.display = 'none';
+                flagLogged = false;
+            }
+        }
+        await loadNotifications();
+        setInterval(loadNotifications, 1000);
+    })()
+</script>
+{% endif %}
+{% endblock %}
