@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k#=wxt8jiht#)eqxa$0n-1q%9sz#)$1x@&ow8i+_4xdl!(v1v4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,23 +84,23 @@ WSGI_APPLICATION = 'HRSapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'freedb_hrsystem',
-        'USER': 'freedb_admin_user',
-        'PASSWORD': 'DV!PNhJ7J5naAn4',
-        'HOST':'sql.freedb.tech',
-        'PORT':'3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'freedb_hrsystem',
+#         'USER': 'freedb_admin_user',
+#         'PASSWORD': 'DV!PNhJ7J5naAn4',
+#         'HOST':'sql.freedb.tech',
+#         'PORT':'3306',
+#     }
+# }
 
 
 # Password validation
