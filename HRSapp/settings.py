@@ -14,6 +14,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,16 +92,35 @@ WSGI_APPLICATION = 'HRSapp.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'freedb_hrsystem',
+#         'USER': 'freedb_admin_user',
+#         'PASSWORD': 'DV!PNhJ7J5naAn4',
+#         'HOST':'sql.freedb.tech',
+#         'PORT':'3306',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'd3fhp1rf36fdmn',
+#         'USER': 'u27c81ih2nq2qc',
+#         'PASSWORD': 'p7c0df14587d5e0b846e14d6772d2f197f7f37ac8eaefca36cc5a1d31b6b0647f',
+#         'HOST':'c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+#         'PORT':'5432',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'freedb_hrsystem',
-        'USER': 'freedb_admin_user',
-        'PASSWORD': 'DV!PNhJ7J5naAn4',
-        'HOST':'sql.freedb.tech',
-        'PORT':'3306',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
+
+
 
 
 # Password validation
